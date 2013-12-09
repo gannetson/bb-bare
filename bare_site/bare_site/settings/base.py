@@ -15,6 +15,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+AUTH_USER_MODEL = 'accounts.BlueBottleUser'
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -27,7 +29,7 @@ TIME_ZONE = 'Europe/Amsterdam'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 SITE_ID = 1
 
@@ -87,11 +89,13 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'bluebottle.bluebottle_utils.middleware.SubDomainSessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'bluebottle.accounts.middleware.LocaleMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -120,6 +124,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     # BlueBottle dependencies.
+    'compressor',
+    'registration',
+    'rest_framework',
     'taggit',
 
     # BlueBottle applications.
