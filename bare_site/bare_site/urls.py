@@ -28,3 +28,7 @@ urlpatterns += i18n_patterns('',
     url(r'^documents/', include('bluebottle.bluebottle_utils.urls')),
     url(r'^admin/utils/taggit-autocomplete/', include('taggit_autocomplete_modified.urls')),
 )
+
+urlpatterns += patterns('',
+    (r'^js$', 'django.views.i18n.javascript_catalog'),
+)
